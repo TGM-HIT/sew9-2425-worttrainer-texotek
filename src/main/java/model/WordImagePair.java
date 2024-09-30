@@ -1,8 +1,9 @@
 package model;
 
+import java.io.Serializable;
 import java.net.URL;
 
-public class WordImagePair {
+public class WordImagePair implements Serializable {
     final private String word;
     final private URL imageURL;
     /**

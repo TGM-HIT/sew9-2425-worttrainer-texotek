@@ -1,10 +1,16 @@
 package model;
 
+import java.io.Serial;
+import java.io.Serializable;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
-public class WordTrainer {
+public class WordTrainer implements Serializable {
+
+    @Serial
+    final private static long serialVersionUID = 1L;
+
     final private List<WordImagePair> wordImagePairs;
     private int selectedIndex = -1;
     private int countTotalGuess = 0;
