@@ -4,6 +4,7 @@ import java.io.Serial;
 import java.io.Serializable;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 public class WordTrainer implements Serializable {
@@ -121,5 +122,13 @@ public class WordTrainer implements Serializable {
      */
     public int getCountWrongGuess() {
         return countWrongGuess;
+    }
+
+    /**
+     * Method to get the list of WordImagePairs
+     * @return List of WordImagePairs
+     */
+    public List<WordImagePair> getWordImagePairs() {
+        return wordImagePairs;
     }
 }
