@@ -29,10 +29,13 @@ public class WordTrainer implements Serializable {
      * @throws IllegalStateException If no pairs are present
      */
     public void selectNewPair() {
+        int selectedBefore = selectedIndex;
         if(wordImagePairs.isEmpty())
             throw new IllegalStateException("No pairs present");
 
-        selectedIndex = (int) (Math.random() * wordImagePairs.size());
+        while(selectedBefore == selectedIndex) {
+            selectedIndex = (int) (Math.random() * wordImagePairs.size());
+        }
     }
 
     /**
