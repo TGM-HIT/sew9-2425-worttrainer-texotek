@@ -3,6 +3,7 @@ package controller;
 import model.WordImagePair;
 import model.WordTrainer;
 import persistence.WordTrainerSaver;
+import persistence.WordTrainerSaverJSON;
 import persistence.WordTrainerSaverSerializable;
 import view.WordTrainerFrame;
 
@@ -19,13 +20,13 @@ import java.util.List;
 public class ApplicationController {
     private WordTrainer model;
     private final WordTrainerFrame view = new WordTrainerFrame(this);
+    private final WordTrainerSaver wordTrainerSaver = new WordTrainerSaverJSON();
 
     /**
      * Constructor for ApplicationController
      * Loads the word trainer from a file
      */
     public ApplicationController() throws MalformedURLException {
-        WordTrainerSaver wordTrainerSaver = new WordTrainerSaverSerializable();
         try {
             model = wordTrainerSaver.load("wordTrainer.ser");
         } catch (IOException e) {
@@ -57,7 +58,6 @@ public class ApplicationController {
      * Method to exit the application, it saves the word trainer to a file
      */
     public void exitApplication() {
-        WordTrainerSaver wordTrainerSaver = new WordTrainerSaverSerializable();
         try {
             wordTrainerSaver.save(model, "wordTrainer.ser");
         } catch (IOException e) {
