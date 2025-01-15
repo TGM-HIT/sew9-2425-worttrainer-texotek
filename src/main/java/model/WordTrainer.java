@@ -7,20 +7,29 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class WordTrainer implements Serializable {
     @Serial
     final private static long serialVersionUID = 1L;
     final private List<WordImagePair> wordImagePairs;
     private int selectedIndex = -1;
+
     private int countTotalGuess = 0;
     private int countCorrectGuess = 0;
     private int countWrongGuess = 0;
+
+    public WordTrainer() {
+        this.wordImagePairs = new ArrayList<>();
+    }
 
     /**
      * Constructor for WordTrainer
      * @param pairs List of WordImagePair
      */
-    public WordTrainer(List<WordImagePair> pairs) {
+    public WordTrainer(@JsonProperty("wordImagePairs") List<WordImagePair> pairs) {
         this.wordImagePairs = pairs;
     }
 
@@ -32,6 +41,12 @@ public class WordTrainer implements Serializable {
         int selectedBefore = selectedIndex;
         if(wordImagePairs.isEmpty())
             throw new IllegalStateException("No pairs present");
+
+
+        if (wordImagePairs.size() == 1) {
+            selectedIndex = 0;
+            return;
+        }
 
         while(selectedBefore == selectedIndex) {
             selectedIndex = (int) (Math.random() * wordImagePairs.size());
@@ -130,5 +145,21 @@ public class WordTrainer implements Serializable {
      */
     public List<WordImagePair> getWordImagePairs() {
         return wordImagePairs;
+    }
+
+    /**
+     * Getter for index
+     * @return current index
+     */
+    public int getSelectedIndex() {
+        return selectedIndex;
+    }
+
+    /**
+     * Setter for index
+     * @param selectedIndex index
+     */
+    public void setSelectedIndex(int selectedIndex) {
+        this.selectedIndex = selectedIndex;
     }
 }

@@ -28,8 +28,9 @@ public class ApplicationController {
      */
     public ApplicationController() throws MalformedURLException {
         try {
-            model = wordTrainerSaver.load("wordTrainer.ser");
+            model = wordTrainerSaver.load("wordTrainer.json");
         } catch (IOException e) {
+            e.printStackTrace();
             List<WordImagePair> pairs = new ArrayList<>();
             pairs.add(new WordImagePair("Apple", new URL("https://www.applesfromny.com/wp-content/uploads/2020/05/20Ounce_NYAS-Apples2.png")));
             pairs.add(new WordImagePair("Banana", new URL("https://images3.alphacoders.com/658/thumb-1920-658610.jpg")));
@@ -59,7 +60,7 @@ public class ApplicationController {
      */
     public void exitApplication() {
         try {
-            wordTrainerSaver.save(model, "wordTrainer.ser");
+            wordTrainerSaver.save(model, "wordTrainer.json");
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
