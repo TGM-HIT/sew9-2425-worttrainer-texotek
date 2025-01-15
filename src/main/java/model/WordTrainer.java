@@ -80,7 +80,6 @@ public class WordTrainer implements Serializable {
 
         if(isCorrect) {
             countCorrectGuess++;
-            selectedIndex = -1;
         }
         else {
             countWrongGuess++;
